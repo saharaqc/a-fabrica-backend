@@ -10,7 +10,12 @@ app = Flask(__name__)
 
 # Configuración CORS
 if os.environ.get('ENVIRONMENT') == 'production':
-    CORS(app, origins=['https://a-fabrica.es', 'https://www.a-fabrica.es'])
+    CORS(app, origins=[
+        'https://a-fabrica.es', 
+        'https://www.a-fabrica.es',
+        'http://localhost:5173',
+        'http://localhost:3000'
+    ])
 else:
     CORS(app)
 
@@ -139,4 +144,5 @@ Fecha deseada de inicio: {data.get('startDate', 'No especificada')}
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     debug = os.environ.get('ENVIRONMENT') != 'production'
+
     app.run(host='0.0.0.0', port=port, debug=debug)
