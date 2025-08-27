@@ -72,7 +72,7 @@ def handle_contact():
                 'message': f'Campos requeridos faltantes: {", ".join(missing_fields)}'
             }), 400
         
-        # Preparar email
+        # Preparar email para el administrador
         subject = f"Nueva consulta de {data['name']} - A Fábrica"
         
         project_types = {
@@ -91,7 +91,7 @@ def handle_contact():
             'consultar': 'Prefiero consultar'
         }
         
-        email_body = f"""
+        admin_email_body = f"""
 Nueva consulta desde el sitio web de A Fábrica
 
 📋 DATOS DEL CLIENTE:
@@ -113,18 +113,51 @@ Fecha deseada de inicio: {data.get('startDate', 'No especificada')}
 ⏰ ENVIADO EL: {datetime.now().strftime('%d/%m/%Y a las %H:%M:%S')}
         """
         
-        # Enviar email
         if app.config['MAIL_USERNAME'] and app.config['MAIL_PASSWORD']:
             try:
-                msg = Message(
+                # 1. Enviar email al administrador
+                admin_msg = Message(
                     subject=subject,
                     recipients=[ADMIN_EMAIL],
-                    body=email_body
+                    body=admin_email_body
                 )
-                mail.send(msg)
+                mail.send(admin_msg)
                 print(f"✅ Email enviado a {ADMIN_EMAIL}")
+                
+                # 2. Enviar email de confirmación al cliente
+                client_subject = "Bienvenido al espacio donde tu historia comienza"
+                client_body = f"""Hola {data['name']},
+
+Gracias por contactar con A Fábrica. Hemos recibido tu consulta y nos pondremos en contacto contigo en un plazo máximo de 24 horas.
+
+Detalles de tu consulta:
+• Proyecto: {project_types.get(data['projectType'], data['projectType'])}
+• Fecha de solicitud: {datetime.now().strftime('%d/%m/%Y a las %H:%M')}
+
+En A Fábrica, cada proyecto es una historia contada en forma, función y detalle. 
+Estamos emocionados de escucharte, enseñarte y acompañarte a hacerlo realidad.
+
+Estamos ansiosos por conocerte,
+El equipo de A Fábrica
+
+---
+A Fábrica - Centro de diseño y producción de mobiliario, carpintería e interiorismo
+Web: https://a-fabrica.es
+Email: info@a-fabrica.es
+Teléfono: +34 604 200 388
+"""
+                
+                confirmation_msg = Message(
+                    subject=client_subject,
+                    recipients=[data['email']],
+                    body=client_body
+                )
+                mail.send(confirmation_msg)
+                print(f"✅ Email de confirmación enviado a {data['email']}")
+                
             except Exception as email_error:
-                print(f"❌ Error enviando email: {email_error}")
+                print(f"❌ Error enviando emails: {email_error}")
+                # No fallar si hay error de email, pero log it
         
         # Guardar en logs
         print(f"📝 NUEVO CONTACTO: {json.dumps(data, ensure_ascii=False, indent=2)}")
