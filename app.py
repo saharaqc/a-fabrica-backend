@@ -20,12 +20,12 @@ else:
     CORS(app)
 
 # Configuración de email
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_SERVER'] = 'smtp.ionos.es'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
-app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
-app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('EMAIL_USER')
+app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_IONOS')
+app.config['MAIL_PASSWORD'] = os.environ.get('PASS_IONOS')
+app.config['MAIL_DEFAULT_SENDER'] = ('A Fábrica', os.environ.get('EMAIL_IONOS'))
 
 mail = Mail(app)
 
@@ -147,7 +147,9 @@ Fecha deseada de inicio: {data.get('startDate', 'No especificada')}
                     <!-- Header -->
                     <tr>
                         <td style="background: linear-gradient(135deg, #084D4B 0%, #62A4A1 100%); padding: 30px; text-align: center; border-radius: 12px 12px 0 0;">
-                            <h1 style="color: #ffffff; margin: 0; font-size: 32px; font-weight: 700; font-family: 'Playfair Display', serif;">A Fábrica</h1>
+                            <h1 style="color: #ffffff; margin: 0; font-size: 32px; font-weight: 700; font-family: 'Playfair Display', serif;">
+                                <span style="color: #CF5138;">A</span> F<span style="color: #CF5138;">á</span>brica
+                            </h1>
                             <p style="color: #ffffff; margin: 10px 0 0 0; opacity: 0.9; font-family: 'Rubik', sans-serif; font-size: 16px;">Centro de diseño y producción de mobiliario, carpintería e interiorismo</p>
                         </td>
                     </tr>
@@ -158,7 +160,7 @@ Fecha deseada de inicio: {data.get('startDate', 'No especificada')}
                             <h2 style="color: #084D4B; margin: 0 0 20px 0; font-size: 28px; font-family: 'Playfair Display', serif; font-weight: 700;">Hola <span style="color: #CF5138;">{data['name']}</span>,</h2>
                             
                             <p style="color: #2C2C2C; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0; font-family: 'Rubik', sans-serif;">
-                                <strong>Gracias por contactar con A Fábrica.</strong> Hemos recibido tu consulta y nos pondremos en contacto contigo en las próximas <strong style="color: #CF5138;">24 horas</strong>.
+                                <strong>Gracias por contactar con <span style="font-family: 'Playfair Display', serif;"><span style="color: #CF5138;">A</span> F<span style="color: #CF5138;">á</span>brica</span>.</strong> Hemos recibido tu consulta y nos pondremos en contacto contigo en las próximas <strong style="color: #CF5138;">24 horas</strong>.
                             </p>
                             
                             <!-- Project Details Box -->
@@ -170,15 +172,15 @@ Fecha deseada de inicio: {data.get('startDate', 'No especificada')}
                             
                             <div style="background: linear-gradient(135deg, #F5F5F5 0%, #ffffff 100%); padding: 20px; border-radius: 8px; border: 1px solid #62A4A1; margin: 25px 0;">
                                 <p style="color: #2C2C2C; font-size: 16px; line-height: 1.6; margin: 0; font-family: 'Rubik', sans-serif; font-style: italic;">
-                                    En A Fábrica, cada proyecto es una historia contada en forma, función y detalle. 
+                                    En <span style="font-family: 'Playfair Display', serif;"><span style="color: #CF5138;">A</span> F<span style="color: #CF5138;">á</span>brica</span>, cada proyecto es una historia contada en forma, función y detalle. 
                                     <strong style="color: #CF5138;">Estamos emocionados de escucharte, enseñarte y acompañarte</strong> 
                                     a hacer realidad tu proyecto.
                                 </p>
                             </div>
                             
                             <p style="color: #2C2C2C; font-size: 16px; line-height: 1.6; margin: 30px 0 0 0; font-family: 'Rubik', sans-serif;">
-                                <strong>Estamos ansiosos por conocerte,</strong><br>
-                                <span style="color: #084D4B; font-weight: 500;">El equipo de A Fábrica</span>
+                                <strong>Lo hacemos simple, bien y contigo,</strong><br>
+                                <span style="color: #084D4B; font-weight: 500;">El equipo de <span style="font-family: 'Playfair Display', serif;"><span style="color: #CF5138;">A</span> F<span style="color: #CF5138;">á</span>brica</span></span>
                             </p>
                         </td>
                     </tr>
@@ -189,7 +191,9 @@ Fecha deseada de inicio: {data.get('startDate', 'No especificada')}
                             <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td style="text-align: center;">
-                                        <h3 style="color: #ffffff; margin: 0 0 20px 0; font-size: 20px; font-family: 'Playfair Display', serif; font-weight: 700;">A Fábrica</h3>
+                                        <h3 style="color: #ffffff; margin: 0 0 20px 0; font-size: 20px; font-family: 'Playfair Display', serif; font-weight: 700;">
+                                            <span style="color: #CF5138;">A</span> F<span style="color: #CF5138;">á</span>brica
+                                        </h3>
                                         <p style="color: #BAA88F; margin: 8px 0; font-size: 14px; font-family: 'Rubik', sans-serif;">
                                             <strong>Web:</strong> <a href="https://a-fabrica.es" style="color: #CF5138; text-decoration: none;">a-fabrica.es</a>
                                         </p>
@@ -227,7 +231,7 @@ Detalles de tu consulta:
 
 En A Fábrica, cada proyecto es una historia contada en forma, función y detalle. Estamos emocionados de escucharte, enseñarte y acompañarte a hacer realidad tu proyecto.
 
-Estamos ansiosos por conocerte,
+Lo hacemos simple, bien y contigo,
 El equipo de A Fábrica
 
 ---
