@@ -79,7 +79,7 @@ def handle_contact():
             'residencial': 'Residencial',
             'comercial': 'Comercial', 
             'institucional': 'Institucional',
-            'muebles': 'Solo Muebles',
+            'muebles': 'Solo Mobiliario',
             'consulta': 'Consulta General'
         }
         
@@ -91,26 +91,26 @@ def handle_contact():
             'consultar': 'Prefiero consultar'
         }
         
-        admin_email_body = f"""
-Nueva consulta desde el sitio web de A Fábrica
+        # 🔧 LÍNEA CORREGIDA - eliminar caracteres problemáticos
+        admin_email_body = f"""Nueva consulta desde el sitio web de A Fábrica
 
-📋 DATOS DEL CLIENTE:
+DATOS DEL CLIENTE:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Nombre: {data['name']}
 Email: {data['email']}
 Teléfono: {data.get('phone', 'No proporcionado')}
 
-📦 DETALLES DEL PROYECTO:
+DETALLES DEL PROYECTO:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Tipo de proyecto: {project_types.get(data['projectType'], data['projectType'])}
 Presupuesto: {budgets.get(data.get('budget', ''), data.get('budget', 'No especificado'))}
 Fecha deseada de inicio: {data.get('startDate', 'No especificada')}
 
-💬 MENSAJE:
+MENSAJE:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 {data['message']}
 
-⏰ ENVIADO EL: {datetime.now().strftime('%d/%m/%Y a las %H:%M:%S')}
+ENVIADO EL: {datetime.now().strftime('%d/%m/%Y a las %H:%M:%S')}
         """
         
         if app.config['MAIL_USERNAME'] and app.config['MAIL_PASSWORD']:
@@ -128,7 +128,7 @@ Fecha deseada de inicio: {data.get('startDate', 'No especificada')}
                 # 2. Enviar email de confirmación al cliente con HTML
                 client_subject = "Confirmación - Hemos recibido tu consulta"
                 
-                # Template HTML con colores y tipografías de A Fábrica
+                # 🎨 TEMPLATE HTML CORREGIDO con colores de marca
                 client_html = f"""
 <!DOCTYPE html>
 <html>
